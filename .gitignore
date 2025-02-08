@@ -6,6 +6,8 @@ __pycache__/
 # C extensions
 *.so
 
+*Graphviz-12.2.1-win64
+
 # Distribution / packaging
 .Python
 build/
