@@ -53,8 +53,8 @@ def load_data(cifar = None, one_hot_labels = False, normalize = False, flatten =
             # torchvision.datasets.utils.download_and_extract_archive(url, download_root=raw_folder, filename=filename, md5=md5)
         ######################################################################
 
-        mnist_train_set = datasets.MNIST(data_dir + '/mnist/', train = True, download = True)
-        mnist_test_set = datasets.MNIST(data_dir + '/mnist/', train = False, download = True)
+        mnist_train_set = datasets.MNIST(data_dir + '/mnist/', train = True, download = False)
+        mnist_test_set = datasets.MNIST(data_dir + '/mnist/', train = False, download = False)
 
         train_input = mnist_train_set.data.view(-1, 1, 28, 28).float()
         train_target = mnist_train_set.targets
