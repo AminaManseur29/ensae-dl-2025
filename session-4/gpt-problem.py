@@ -3,16 +3,16 @@ import torch
 import torch.nn as nn
 from torch.nn import functional as F
 
-# final results with this code
-# step=4800: train loss = 1.0883, val loss = 1.4908
-# LARTIUS:
-# Now Mars, they love me.
+# # final results with this code
+# # step=4800: train loss = 1.0883, val loss = 1.4908
+# # LARTIUS:
+# # Now Mars, they love me.
 
-# LARTIUS:
-# Yeven altood my opprovoty.
+# # LARTIUS:
+# # Yeven altood my opprovoty.
 
-# MARIANA:
-# Traitor, I will hang
+# # MARIANA:
+# # Traitor, I will hang
 
 batch_size = 64 # how many independent sequences will we process in parallel?
 block_size = 256 # what is the maximum context length for predictions?
@@ -31,18 +31,18 @@ torch.manual_seed(1337)
 with open('input.txt', 'r', encoding='utf-8') as f:
     text = f.read()
 
-# create vocabulary
+# # create vocabulary
 chars = sorted(list(set(text)))
 vocab_size = len(chars)
 
-# create a mapping from characters to integers
-stoi = { ch:i for i,ch in enumerate(chars) }
-itos = { i:ch for i,ch in enumerate(chars) }
+# # create a mapping from characters to integers
+stoi = {ch:i for i,ch in enumerate(chars)}
+itos = {i:ch for i,ch in enumerate(chars)}
 encode = lambda s: [stoi[c] for c in s] # encoder: take a string, output a list of integers
 decode = lambda l: ''.join([itos[i] for i in l]) # decoder: take a list of integers, output a string
 data = torch.tensor(encode(text), dtype=torch.long)
 
-# Let's now split up the data into train and validation sets
+# # Let's now split up the data into train and validation sets
 n = int(0.9*len(data)) # first 90% will be train, rest val
 train_data = data[:n]
 val_data = data[n:]
@@ -69,7 +69,7 @@ def estimate_loss():
     model.train()
     return out
 
-# Copy your Head, MultiHeadAttention, FeedForward and Block classes here
+# # Copy your Head, MultiHeadAttention, FeedForward and Block classes here
 class Head(nn.Module):
 
     def __init__(self, head_size):
@@ -77,20 +77,24 @@ class Head(nn.Module):
         self.key = nn.Linear(n_embd, head_size, bias=False)
         self.query = nn.Linear(n_embd, head_size, bias=False)   
         self.value = nn.Linear(n_embd, head_size, bias=False)
-        self.dropout = nn.Dropout(0.1)
+        self.dropout = nn.Dropout(dropout)
         self.register_buffer('tril', torch.tril(torch.ones(block_size, block_size))) # store a persistent buffer for the forward pass
 
     def forward (self, x):
         B, T, C = x.shape
-        keys = self.key(x)
-        queries = self.query(x)
-        values = self.value(x)
-        wei = torch.matmul(queries, keys.transpose(-2, -1))
-        wei = wei / math.sqrt(C)
-        wei = wei.masked_fill(self.tril==0, float('-inf'))
+        k = self.key(x)
+        q = self.query(x)
+        v = self.value(x)
+        d_k = q.shape[-1]
+
+        wei = torch.matmul(q, k.transpose(-2, -1))/ math.sqrt(d_k)
+
+        if T>1 :
+            wei = wei.masked_fill(self.tril[:T, :T] == 0, float('-inf'))
+            
         wei = F.softmax(wei, dim=-1)
         wei = self.dropout(wei)
-        out = torch.matmul(wei, values)
+        out = torch.matmul(wei, v)
         return out
     
 class MultiHeadAttention(nn.Module):
@@ -100,8 +104,7 @@ class MultiHeadAttention(nn.Module):
         self.linear = nn.Linear(num_heads * head_size, n_embd)
 
     def forward (self, x):
-        heads = [h(x) for h in self.heads]
-        out = torch.cat(heads, dim=-1)
+        out = torch.cat([h(x) for h in self.heads], dim=-1)
         out = self.linear(out)
         return out
     
@@ -132,10 +135,10 @@ class Block(nn.Module):
     def forward(self, x):
         out = self.ln1(x)
         out = self.attention(out)
-        int = out + x
-        out = self.ln2(int)
+        residual = out + x
+        out = self.ln2(residual)
         out = self.ff(out)
-        out = out + int
+        out = out + residual
         return out
 
 class GPT(nn.Module):
@@ -145,7 +148,7 @@ class GPT(nn.Module):
         self.token_embedding_table = nn.Embedding(vocab_size, n_embd)
         self.pos_embedding_table = nn.Embedding(block_size, n_embd)
         # define blocks, a layer norm and a linear layer
-        self.blocks = nn.ModuleList([Block(n_embd, n_heads) for _ in range(n_layer)])
+        self.blocks = nn.Sequential(*[Block(n_embd, n_heads) for _ in range(n_layer)])
         self.ln_f = nn.LayerNorm(n_embd)
         self.head = nn.Linear(n_embd, vocab_size)
 
@@ -155,8 +158,7 @@ class GPT(nn.Module):
         pos_emb = self.pos_embedding_table(torch.arange(T, device=device)) # (T, C)
         x = token_emb + pos_emb # (B, T, C) # sum the token embeddings and position embeddings
         # apply blocks, layer norm and linear layer (leading to the logits variable)
-        for block in self.blocks:
-            x = block(x)
+        x = self.blocks(x)
         x = self.ln_f(x)
         logits = self.head(x) # (B, T, V)
     
@@ -166,7 +168,7 @@ class GPT(nn.Module):
         else:
             # idx and targets are both (B,T) tensor of integers
             B, T, C = logits.shape
-            logits = logits.view (B*T, C)
+            logits = logits.view(B*T, C)
             targets = targets.view(B*T)
             loss = F.cross_entropy(logits, targets)
         return logits, loss
@@ -199,7 +201,7 @@ for iter in range(max_iters): # increase number of steps for good results...
     # evaluate once in a while
     if iter % eval_interval == 0:
         losses = estimate_loss()
-        print (f"step={iter}: train loss = {losses['train']:.4f}, val loss = {losses['val']:.4f}")
+        print(f"step={iter}: train loss = {losses['train']:.4f}, val loss = {losses['val']:.4f}")
 
     # sample a batch of data
     xb, yb = get_batch('train')
@@ -212,4 +214,4 @@ for iter in range(max_iters): # increase number of steps for good results...
 
 # generate some text
 context = torch.zeros((1, 1), dtype=torch.long, device=device)
-print(decode(m.generate(idx = context, max_new_tokens=100)[0].tolist()))
+print(decode(m.generate(idx=context, max_new_tokens=1000)[0].tolist()))
