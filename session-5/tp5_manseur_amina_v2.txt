@@ -1,0 +1,111 @@
+plain-18: 11011722
+/opt/conda/lib/python3.12/site-packages/torch/nn/modules/module.py:1739: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  return self._call_impl(*args, **kwargs)
+Epoch [1/10], Loss: 2.3079
+Accuracy of the network on the 5000 validation images: 10.48 %
+Epoch [2/10], Loss: 2.3016
+Accuracy of the network on the 5000 validation images: 10.5 %
+Epoch [3/10], Loss: 2.3067
+Accuracy of the network on the 5000 validation images: 10.52 %
+Epoch [4/10], Loss: 2.3018
+Accuracy of the network on the 5000 validation images: 10.44 %
+Epoch [5/10], Loss: 2.3027
+Accuracy of the network on the 5000 validation images: 10.48 %
+Epoch [6/10], Loss: 2.2951
+Accuracy of the network on the 5000 validation images: 10.5 %
+Epoch [7/10], Loss: 2.3035
+Accuracy of the network on the 5000 validation images: 10.48 %
+Epoch [8/10], Loss: 2.2983
+Accuracy of the network on the 5000 validation images: 10.46 %
+Epoch [9/10], Loss: 2.2993
+Accuracy of the network on the 5000 validation images: 10.54 %
+Epoch [10/10], Loss: 2.3070
+Accuracy of the network on the 5000 validation images: 10.52 %
+
+plain-34: 21123594
+Epoch [1/10], Loss: 2.3075
+Accuracy of the network on the 5000 validation images: 9.74 %
+Epoch [2/10], Loss: 2.3078
+Accuracy of the network on the 5000 validation images: 9.4 %
+Epoch [3/10], Loss: 2.3053
+Accuracy of the network on the 5000 validation images: 9.52 %
+Epoch [4/10], Loss: 2.3030
+Accuracy of the network on the 5000 validation images: 9.92 %
+Epoch [5/10], Loss: 2.2997
+Accuracy of the network on the 5000 validation images: 9.52 %
+Epoch [6/10], Loss: 2.3080
+Accuracy of the network on the 5000 validation images: 9.66 %
+Epoch [7/10], Loss: 2.3059
+Accuracy of the network on the 5000 validation images: 9.5 %
+Epoch [8/10], Loss: 2.2950
+Accuracy of the network on the 5000 validation images: 9.64 %
+Epoch [9/10], Loss: 2.3015
+Accuracy of the network on the 5000 validation images: 9.58 %
+Epoch [10/10], Loss: 2.3065
+Accuracy of the network on the 5000 validation images: 9.62 %
+
+resnet-18: 11181642
+Epoch [1/10], Loss: 2.3161
+Accuracy of the network on the 5000 validation images: 9.86 %
+Epoch [2/10], Loss: 2.4622
+Accuracy of the network on the 5000 validation images: 9.72 %
+Epoch [3/10], Loss: 2.2643
+Accuracy of the network on the 5000 validation images: 9.8 %
+Epoch [4/10], Loss: 2.2938
+Accuracy of the network on the 5000 validation images: 9.82 %
+Epoch [5/10], Loss: 2.2776
+Accuracy of the network on the 5000 validation images: 9.88 %
+Epoch [6/10], Loss: 2.4078
+Accuracy of the network on the 5000 validation images: 9.8 %
+Epoch [7/10], Loss: 2.0023
+Accuracy of the network on the 5000 validation images: 9.86 %
+Epoch [8/10], Loss: 2.4209
+Accuracy of the network on the 5000 validation images: 9.86 %
+Epoch [9/10], Loss: 2.3369
+Accuracy of the network on the 5000 validation images: 9.84 %
+Epoch [10/10], Loss: 2.5675
+Accuracy of the network on the 5000 validation images: 9.74 %
+
+resnet-34:21289802
+Epoch [1/10], Loss: 2.3535
+Accuracy of the network on the 5000 validation images: 10.34 %
+Epoch [2/10], Loss: 2.6257
+Accuracy of the network on the 5000 validation images: 10.44 %
+Epoch [3/10], Loss: 2.0960
+Accuracy of the network on the 5000 validation images: 10.24 %
+Epoch [4/10], Loss: 2.3489
+Accuracy of the network on the 5000 validation images: 10.2 %
+Epoch [5/10], Loss: 2.5805
+Accuracy of the network on the 5000 validation images: 10.34 %
+Epoch [6/10], Loss: 2.3203
+Accuracy of the network on the 5000 validation images: 10.44 %
+Epoch [7/10], Loss: 2.4894
+Accuracy of the network on the 5000 validation images: 10.46 %
+Epoch [8/10], Loss: 2.1555
+Accuracy of the network on the 5000 validation images: 10.42 %
+Epoch [9/10], Loss: 2.6517
+Accuracy of the network on the 5000 validation images: 10.36 %
+Epoch [10/10], Loss: 2.7284
+Accuracy of the network on the 5000 validation images: 10.48 %
+
+resnet-50: 23528522
+Epoch [1/10], Loss: 2.4579
+Accuracy of the network on the 5000 validation images: 10.3 %
+Epoch [2/10], Loss: 2.1312
+Accuracy of the network on the 5000 validation images: 10.22 %
+Epoch [3/10], Loss: 2.6771
+Accuracy of the network on the 5000 validation images: 10.52 %
+Epoch [4/10], Loss: 2.6665
+Accuracy of the network on the 5000 validation images: 10.22 %
+Epoch [5/10], Loss: 2.6423
+Accuracy of the network on the 5000 validation images: 10.2 %
+Epoch [6/10], Loss: 2.5043
+Accuracy of the network on the 5000 validation images: 10.28 %
+Epoch [7/10], Loss: 2.4114
+Accuracy of the network on the 5000 validation images: 10.86 %
+Epoch [8/10], Loss: 2.4234
+Accuracy of the network on the 5000 validation images: 10.34 %
+Epoch [9/10], Loss: 2.7014
+Accuracy of the network on the 5000 validation images: 10.5 %
+Epoch [10/10], Loss: 2.0995
+Accuracy of the network on the 5000 validation images: 10.28 %
